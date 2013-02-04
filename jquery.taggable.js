@@ -20,6 +20,12 @@
     // delimiter for separating tags
     delimiter: ',',
 
+    // set a prefix for the tag to begin with (or else it won't be accepted)
+    prefix: null,
+
+    // set a suffix for the tag to end with (or else it won't be accepted)
+    suffix: null,
+
     // default text on the input
     placeholder: 'Add a tag',
 
@@ -68,6 +74,12 @@
      * @type  {String}
      */
     _placeholder = $( _original ).attr('placeholder') || _options.placeholder;
+
+    /*
+     * Private RegExp to check a potential tag against
+     * @type  {RegExp}
+     */
+    _tagRegexp = new RegExp( "^"+ [_options.prefix, _options.suffix].join("(.+)") +"$" );
 
     /*
      * Private replacement object
@@ -120,6 +132,16 @@
      */
     _isBlank = function( element ) {
       return $.trim( $(element).val() ) == "" ? true : false;
+    };
+
+    /*
+     * Private function to check whether element's value may be a tag
+     *
+     * @param   {Object}  element   The DOM elemtn to check the value against
+     * @return  {Boolean} true or false
+     */
+    _isTag = function( element ) {
+      return _tagRegexp.test( $.trim( $(element).val() ) );
     };
 
     /*
@@ -197,15 +219,10 @@
         }
 
       }).on( 'keydown keypress', function(event) {
-        console.log( event.which.toString() );
-
-        // do nothing if first key is space and element is empty
-        if( event.which == _keys.SPACE && _isBlank(this) ) {
-          return false;
-        };
+        if( event.which == _keys.SPACE && _isBlank(this) ) return false; // early exit
 
         // if delimiter (comma by default), tab or enter then add a tag
-        if( event.which == _delimiter() || event.which == _keys.TAB || event.which == _keys.ENTER ) {
+        if( _isTag(this) && (event.which == _delimiter() || event.which == _keys.TAB || event.which == _keys.ENTER) ) {
           // add and reset
           _add( $(this).val() );
           $(this).val( '' );
