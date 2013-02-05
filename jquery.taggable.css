@@ -1,0 +1,64 @@
+.tag {
+  display: inline-block;
+
+  padding: 0 5px;
+  margin: 0 5px 0 0;
+
+  font-size: 11px;
+  line-height: 14px;
+
+  color: #000000;
+
+  background-color: #FDEFB1;
+  border: 1px solid #F7C942;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+div.taggable-wrapper {
+  overflow-y: auto;
+  padding: 2px 5px;
+
+  border: 1px solid #E5E5E5;
+  background: #FFF;
+}
+
+.taggable-tag {
+  display: inline-block;
+
+  padding: 0 5px;
+  margin: 0 5px 0 0;
+
+  font-size: 11px;
+  line-height: 14px;
+
+  color: #000000;
+
+  background-color: #FDEFB1;
+  border: 1px solid #F7C942;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+
+  .taggable-close {
+    padding: 0 6px 0 0;
+    margin-left: 5px;
+    height: 100%;
+
+    text-decoration: none;
+  }
+}
+
+.taggable-input {
+  padding: 2px 0;
+  width: auto;
+
+  color: #888888;
+  border: 0 none;
+  background-color: transparent;
+}
+
+.tabbagle-input.focus {
+  color: #000000;
+  outline: none;
+}
+
